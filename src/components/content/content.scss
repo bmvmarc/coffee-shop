@@ -1,0 +1,74 @@
+.content {
+    h2 {
+        text-align: center;
+        margin: 0 auto 0 auto; 
+        padding: 80px 0 0 0;
+
+        font-size: 24px;
+        line-height: 35px;
+    }
+}
+
+.about-us {    
+    
+    .beans {
+        display: block; 
+        margin: 20px auto 0 auto;
+    }
+
+    p {
+        text-align: center;
+        margin: 40px auto 0 auto;      
+        font-size: 14px;
+        width: 589px;
+    }  
+}
+
+.our-best {
+    background: url('../../imgs/paper.jpg'); 
+    margin-top: 80px;
+
+    
+    background-size: 100% ;
+    max-height: 640px;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.coffee-items {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 70px;
+    padding: 40px 320px 110px 320px;
+    text-align: center;
+}
+.coffee-item {
+    width: 220px;
+    height: 240px;
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 8px;   
+    font-size: 14px;
+    line-height: 20px;
+    
+
+    margin-left: auto;
+    margin-right: auto;
+
+    .item {
+        padding-top: 22px;  
+        text-align: center;
+    }
+
+    p {
+        padding-top: 10px;
+        margin: 0; 
+    }
+
+    .price {
+        font-weight: bold;
+        text-align: right;
+        margin-right: 20px;
+    }
+}

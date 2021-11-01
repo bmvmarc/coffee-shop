@@ -1,21 +1,17 @@
-import beans from '../../imgs/coffee-beans.svg';
-import logo from '../../imgs/Beans logo.svg';
+import logo from '../../imgs/beans-logo.svg';
+import MainMenu from '../mainMenu/mainMenu';
 
 import './footer.scss';
 
-const Footer = () => {
+const Footer = ({onMenuClick}) => {
     return (<>
-        <>
-        <div>
-            <button className='menu-item' name='coffee-house'>
-                <img src={beans} alt="coffee-beans" />
-                Coffee house
-            </button>
-            <button className='menu-item' name='our-coffee'>Our coffee</button>
-            <button className='menu-item' name='for-your-plesure'>For your plesure</button>
+        <div className='footer'>
+
+            <MainMenu onMenuClick={onMenuClick} color={'black'}/>
+
+            <img className='beans-footer' src={logo} alt="coffee-beans" />
+
         </div>
-        <img src={logo} alt="coffee-beans" />
-        </>
     </>);
 }
 
