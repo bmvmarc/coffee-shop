@@ -1,0 +1,52 @@
+.about {        
+    .beans {
+        display: block; 
+        margin: 20px auto 0 auto;
+    }
+
+    p {
+        text-align: center;
+        margin: 40px auto 0 auto;      
+        font-size: 14px;
+        line-height: 20px;
+    }  
+}
+
+.about-us {
+    h2 {
+        padding: 80px 0 0 0;
+    }
+    p {
+        width: 589px;
+    }      
+}
+.about-our-beans {
+    margin: 70px auto 60px auto;
+    width: 800px;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 0;
+    text-align: center;  
+    
+    .girl {
+        display: block; 
+        margin: 0 auto 0 auto;
+    }    
+
+    h2 {
+        padding: 10px 0 0 0;   
+    }
+
+    p {
+        width: 346px;
+    } 
+}
+
+.left-field {
+    // border: solid 1px  grey;
+    width: 400px;
+}
+.right-field {
+    // border: solid 1px rgb(194, 85, 85);
+    width: 400px;
+}

@@ -4,29 +4,31 @@ import './header.scss';
 
 const Header = ({onMenuClick, menuName}) => {
 
+    const house = (
+        <div className='header-main'>
+            <MainMenu onMenuClick={onMenuClick} color={'white'}/>
 
-    const house = (<>
-        <MainMenu onMenuClick={onMenuClick} color={'white'}/>
+            <h1>Everything You Love About Coffee</h1>
+            
+            <img className='beans-header' src={logoWhite} alt="coffee-beans" />
 
-        <h1>Everything You Love About Coffee</h1>
-        
-        <img className='beans-header' src={logoWhite} alt="coffee-beans" />
+            <h2>We make  every day full of energy and taste</h2>
+            <h2>Want to try our beans?</h2>
+            
+            <button className='more'>More</button>
+        </div>);
 
-        <h2>We makes every day full of energy and taste</h2>
-        <h2>Want to try our beans?</h2>
-        
-        <button className='more'>More</button>
-    </>);
+    const coffee = (
+        <div className='header'>
+            <MainMenu onMenuClick={onMenuClick} color={'white'}/>
+            <h1>Our Coffee</h1>
+        </div>);
 
-    const coffee = (<>
-        <MainMenu onMenuClick={onMenuClick} color={'white'}/>
-        <h1>Our Coffee</h1>
-    </>);
-
-    const plesure = (<>
-        <MainMenu onMenuClick={onMenuClick} color={'white'}/>
-        <h1>For your plesure</h1>
-    </>);
+    const plesure = (
+        <div className='header'>
+            <MainMenu onMenuClick={onMenuClick} color={'white'}/>
+            <h1>For your plesure</h1>
+        </div>);
 
     let header = null;
 
@@ -47,14 +49,7 @@ const Header = ({onMenuClick, menuName}) => {
             break;
     }
 
-    return (<>
-        <div className='header'>
-           
-            {header}
-
-        </div>
-
-    </>);
+    return (<>{header}</>);
 }
 
 export default Header;
