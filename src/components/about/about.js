@@ -5,7 +5,7 @@ import cup from '../../imgs/cup.jpg';
 
 import './about.scss';
 
-const About = ({menuName}) => {
+const About = ({menuName, coffeeItem}) => {
 
     const aboutUs = ( <>     
         <div className='about about-us'>
@@ -33,7 +33,7 @@ const About = ({menuName}) => {
     </>); 
 
     const aboutOur = (imgName, articleName) => ( <>     
-        <div className='about about-our-beans'>
+        <div className='about about-two-columns about-our-beans'>
 
             <div className='left-field'>
                 <img className='girl' src={imgName} alt="girl" />
@@ -57,6 +57,37 @@ const About = ({menuName}) => {
         </div>    
     </>);
 
+    const aboutItem = (coffeeItem) => ( <>     
+        <div className='about about-two-columns about-coffe-item'>
+
+            <div className='left-field'>
+                <img className='girl' 
+                    src={require(`../../imgs/coffee/${coffeeItem.imgName}.jpg`).default}
+                    alt="coffee" />
+            </div>
+            <div className='right-field'>
+                <h2>About it</h2>
+
+                <img className='beans' src={logo} alt="coffee-beans" />
+
+                <div className='paragraphs'>
+                    <p><b>Country:</b> {coffeeItem.origin}</p>
+                    <p><b>Description:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                    <p><b>Price: </b> <span>{coffeeItem.price}$</span></p>
+                </div> 
+                
+            </div> 
+
+        </div>    
+    </>);
+
+
+    if (coffeeItem) {
+        return <>{aboutItem(coffeeItem)}</>
+    }
 
     let about = null;
     switch (menuName) {

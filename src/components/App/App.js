@@ -14,27 +14,34 @@ export default class App extends Component{
     this.state = {
       menu: 'coffee-house',
       data: [
-            {name: 'Solimo Coffee Beans 2 kg', origin: 'Brazil', price: 10.73, imgName: '1', best: true}, 
-            {name: 'Presto Coffee Beans 1 kg', origin: 'Kenya', price: 15.99, imgName: '2', best: true}, 
-            {name: 'AROMISTICO Coffee 1 kg', origin: 'Columbia', price: 6.99, imgName: '3', best: true},
-            {name: 'AROMISTICO Coffee 1 kg B', origin: 'Brazil', price: 10.73, imgName: '3', best: false}, 
-            {name: 'AROMISTICO Coffee 1 kg K', origin: 'Kenya', price: 15.99, imgName: '4', best: true}, 
-            {name: 'AROMISTICO Coffee 1 kg C', origin: 'Columbia', price: 6.99, imgName: '3', best: false}            
-      ]
+            {name: 'Solimo Coffee Beans 2 kg', origin: 'Brazil',   price: 10.73, imgName: '1', best: true}, 
+            {name: 'Presto Coffee Beans 1 kg', origin: 'Kenya',    price: 15.99, imgName: '2', best: true}, 
+            {name: 'AROMISTICO Coffee 1 kg',   origin: 'Columbia', price: 6.99,  imgName: '3', best: true},
+            {name: 'AROMISTICO Coffee 1 kg B', origin: 'Brazil',   price: 10.73, imgName: '3', best: false}, 
+            {name: 'AROMISTICO Coffee 1 kg K', origin: 'Kenya',    price: 15.99, imgName: '4', best: true}, 
+            {name: 'AROMISTICO Coffee 1 kg C', origin: 'Columbia', price: 6.99,  imgName: '3', best: false}            
+      ],
+      coffeeItem: null
     }
   }
 
   onMenuClick = (e) => {
     e.preventDefault();
     this.setState({
-      menu: e.target.name
+      menu: e.target.name, 
+      coffeeItem: null
     });
   }
 
+  onCoffeeItemClick = (item) => {
+    this.setState({
+        coffeeItem: item
+    });
+  }
 
   render () {
 
-    const menu = this.state.menu;
+    const {menu, coffeeItem, data} = this.state;
 
     return (
       <div className="App">
@@ -44,8 +51,14 @@ export default class App extends Component{
           menuName={menu}/>
 
         <div className='content'> 
-            <About menuName={menu}/>
-            <CoffeeList menuName={menu} data={this.state.data}/>
+            <About menuName={menu} coffeeItem={coffeeItem}/>
+            {coffeeItem ? null : 
+              <CoffeeList 
+                  menuName={menu} 
+                  data={data} 
+                  onCoffeeItemClick={this.onCoffeeItemClick}
+              />
+            }
         </div>
 
         <Footer 
