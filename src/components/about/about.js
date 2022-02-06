@@ -1,7 +1,6 @@
 import logo from '../../imgs/beans-logo.svg';
 import girl from '../../imgs/girl.jpg';
 import cup from '../../imgs/cup.jpg';
-// import coffeeItem from '../../imgs/coffee/4.jpg';
 
 import './about.scss';
 

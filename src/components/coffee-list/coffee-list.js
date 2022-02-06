@@ -1,96 +1,74 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import Filter from '../filter/filter';
 import './coffee-list.scss';
 
-export default class CoffeeList extends Component {
+const CoffeeList = (props) => {
 
-    constructor(props) {
-        super(props);
+    const [searchText, setSearchText] = useState('');
+    const [filterText, setFilterText] = useState('');
 
-        this.state = {
-            searchText: '',
-            filterText: ''
-        }
-    }
-
-    getItems = (clbFunc, listLenght, showOrigin) => {
+    const getItems = (clbFunc, listLenght, showOrigin) => {
         return (
-        this.props.data.filter(clbFunc).splice(0, listLenght).map((i, key) => 
+        props.data.filter(clbFunc).splice(0, listLenght).map((i, key) => 
             <div 
                 key={key} 
                 data-img={i.imgName}
                 className='coffee-item'
-                onClick={() => this.props.onCoffeeItemClick(i)}
-            >
+                onClick={() => props.onCoffeeItemClick(i)}>
                 <img 
                     className='item' 
                     src={require(`../../imgs/coffee/${i.imgName}.jpg`).default}  
-                    alt="coffee" 
-                />
+                    alt="coffee" />
                 <p>{i.name}</p>
                 {showOrigin ? <p className='right'>{i.origin}</p> : null}
                 <p className='price right'>{i.price}$</p>
             </div>
         ))};
 
-    getElems = (classNames, title, clbFunc, listLenght, showOrigin=false) => (
+    const getElems = (classNames, title, clbFunc, listLenght, showOrigin=false) => (
         <div className={classNames}>
             {title}
             <div className='coffee-list'>
-                {this.getItems(clbFunc, listLenght, showOrigin)}
+                {getItems(clbFunc, listLenght, showOrigin)}
             </div>
         </div>
     );
 
-    onSearch = (searchText) => {
+    const bar = <div className='line'></div>;
 
-        this.setState({
-            searchText
-        })        
-     
+    let res = null;
+
+    switch (props.menuName) {
+        case 'coffee-house' : 
+            res = getElems('our-best', <h2>Our Best</h2>, (i) => i.best, 3);
+            break;
+
+        case 'our-coffee' : 
+            const callBackFun = (i) => (i.name.toLowerCase().includes(searchText)) && (filterText === '' || i.origin === filterText);
+            res = (<>   
+                        {bar}
+                        <Filter 
+                            filterText={filterText}
+                            searchText={searchText}
+                            onSearch={txt => setSearchText(txt)} 
+                            onFilter={txt => setFilterText(txt)}/> 
+                        {getElems('all-list', null, callBackFun, 6, true)} 
+                    </>);
+            break;
+
+        case 'for-your-plesure' : 
+            res = (<>   
+                        {bar}
+                        {getElems('all-list', null, (i) => i, 6, true)} 
+                    </>);
+            break;
+
+        default:
+            res = null;
+
     }
 
-    onFilter = (filterText) => {
-
-        this.setState({
-            filterText
-        })        
-     
-    }
-    render () {
-        const bar = <div className='line'></div>;
-
-        let res = null;
-
-        const {searchText, filterText} = this.state;
-    
-        switch (this.props.menuName) {
-            case 'coffee-house' : 
-                res = this.getElems('our-best', <h2>Our Best</h2>, (i) => i.best, 3);
-                break;
-    
-            case 'our-coffee' : 
-                const callBackFun = (i) => (i.name.toLowerCase().includes(searchText)) && (filterText === '' || i.origin === filterText);
-                res = (<>   
-                            {bar}
-                            <Filter onSearch={this.onSearch} onFilter={this.onFilter}/> 
-                            {this.getElems('all-list', null, callBackFun, 6, true)} 
-                       </>);
-                break;
-    
-            case 'for-your-plesure' : 
-                res = (<>   
-                            {bar}
-                            {this.getElems('all-list', null, (i) => i, 6, true)} 
-                       </>);
-                break;
-    
-            default:
-                res = null;
-    
-        }
-    
-        return (<> {res} </>)
-    }
-
+    return (<> {res} </>)
 }
+
+export default CoffeeList;

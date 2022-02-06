@@ -39,5 +39,4 @@ const mainMenu = ({onMenuClick, color}) => {
     </>);
 }
 
-
 export default mainMenu;
