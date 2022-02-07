@@ -3,8 +3,13 @@ import girl from '../../imgs/girl.jpg';
 import cup from '../../imgs/cup.jpg';
 
 import './about.scss';
+import { useContext } from 'react';
+import MenuContext from '../context/MenuContext';
 
-const About = ({menuName, coffeeItem}) => {
+const About = ({coffeeItem}) => {
+
+    const {name: menuName} = useContext(MenuContext);
+    console.log(menuName)
 
     const aboutUs = ( <>     
         <div className='about about-us'>

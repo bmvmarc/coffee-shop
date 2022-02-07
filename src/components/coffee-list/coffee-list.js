@@ -1,20 +1,24 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import MenuContext from '../context/MenuContext';
 import Filter from '../filter/filter';
 import './coffee-list.scss';
 
-const CoffeeList = (props) => {
+
+const CoffeeList = ({data, onCoffeeItemClick}) => {
+
+    const {name: menuName} = useContext(MenuContext);
 
     const [searchText, setSearchText] = useState('');
     const [filterText, setFilterText] = useState('');
 
     const getItems = (clbFunc, listLenght, showOrigin) => {
         return (
-        props.data.filter(clbFunc).splice(0, listLenght).map((i, key) => 
+        data.filter(clbFunc).splice(0, listLenght).map((i, key) => 
             <div 
                 key={key} 
                 data-img={i.imgName}
                 className='coffee-item'
-                onClick={() => props.onCoffeeItemClick(i)}>
+                onClick={() => onCoffeeItemClick(i)}>
                 <img 
                     className='item' 
                     src={require(`../../imgs/coffee/${i.imgName}.jpg`).default}  
@@ -38,7 +42,7 @@ const CoffeeList = (props) => {
 
     let res = null;
 
-    switch (props.menuName) {
+    switch (menuName) {
         case 'coffee-house' : 
             res = getElems('our-best', <h2>Our Best</h2>, (i) => i.best, 3);
             break;

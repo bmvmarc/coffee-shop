@@ -1,12 +1,17 @@
 import logoWhite from '../../imgs/beans-logo-white.svg';
 import MainMenu from '../mainMenu/mainMenu';
 import './header.scss';
+import MenuContext from "../context/MenuContext";
+import { useContext } from 'react';
 
-const Header = ({onMenuClick, menuName}) => {
+
+const Header = () => {
+
+    const {name: menuName} = useContext(MenuContext);
 
     const house = (
         <div className='header-main'>
-            <MainMenu onMenuClick={onMenuClick} color={'white'}/>
+            <MainMenu color={'white'}/>
 
             <h1>Everything You Love About Coffee</h1>
             
@@ -20,13 +25,13 @@ const Header = ({onMenuClick, menuName}) => {
 
     const coffee = (
         <div className='header'>
-            <MainMenu onMenuClick={onMenuClick} color={'white'}/>
+            <MainMenu color={'white'}/>
             <h1>Our Coffee</h1>
         </div>);
 
     const plesure = (
         <div className='header'>
-            <MainMenu onMenuClick={onMenuClick} color={'white'}/>
+            <MainMenu color={'white'}/>
             <h1>For your plesure</h1>
         </div>);
 

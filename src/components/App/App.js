@@ -1,10 +1,11 @@
 import Footer from "../footer/footer";
 import Header from "../header/header";
-import { useState } from "react";
 import About from '../about/about';
 import CoffeeList from '../coffee-list/coffee-list';
 import './app.scss';
 
+import MenuContext from "../context/MenuContext";
+import { useState,  useMemo } from "react";
 
 const App = (props) => {
 
@@ -19,32 +20,39 @@ const App = (props) => {
                 {name: 'AROMISTICO Coffee 1 kg C', origin: 'Columbia', price: 6.99,  imgName: '3', best: false}            
             ];
   
-  const onMenuClick = (e) => {
+
+  const setMenuName = (e) => {
     e.preventDefault();
     setMenu(e.target.name);
     setCoffeeItem(null);
   }
 
+  const valueMenuContext = {
+      name: menu, 
+      setMenuName
+  };
+
   return (
     <div className="App">
-      
-      <Header 
-        onMenuClick={onMenuClick}
-        menuName={menu}/>
 
-      <div className='content'> 
-          <About menuName={menu} coffeeItem={coffeeItem}/>
-          {coffeeItem ? null : 
-            <CoffeeList 
-                menuName={menu} 
-                data={data} 
-                onCoffeeItemClick={item => setCoffeeItem(item)}
-            />
-          }
-      </div>
+      <MenuContext.Provider value={valueMenuContext}>
+        
+        <Header/>      
 
-      <Footer 
-        onMenuClick={onMenuClick}/>
+        <div className='content'> 
+            <About 
+              coffeeItem={coffeeItem}/>
+            {coffeeItem ? null : 
+              <CoffeeList 
+                  data={data} 
+                  onCoffeeItemClick={item => setCoffeeItem(item)}
+              />
+            }
+        </div>
+
+        <Footer/>
+
+      </MenuContext.Provider>
 
     </div>
   );
