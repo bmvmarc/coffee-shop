@@ -1,12 +1,10 @@
-import { useContext, useState } from 'react';
-import MenuContext from '../context/MenuContext';
+import {  useState } from 'react';
 import Filter from '../filter/filter';
 import './coffee-list.scss';
 
 
-const CoffeeList = ({data, onCoffeeItemClick}) => {
-
-    const {name: menuName} = useContext(MenuContext);
+const CoffeeList = ({menu, data, onCoffeeItemClick}) => {
+    console.log('CoffeeList render')
 
     const [searchText, setSearchText] = useState('');
     const [filterText, setFilterText] = useState('');
@@ -42,7 +40,7 @@ const CoffeeList = ({data, onCoffeeItemClick}) => {
 
     let res = null;
 
-    switch (menuName) {
+    switch (menu) {
         case 'coffee-house' : 
             res = getElems('our-best', <h2>Our Best</h2>, (i) => i.best, 3);
             break;

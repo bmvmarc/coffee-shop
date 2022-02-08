@@ -5,11 +5,12 @@ import CoffeeList from '../coffee-list/coffee-list';
 import './app.scss';
 
 import MenuContext from "../context/MenuContext";
-import { useState,  useMemo } from "react";
+import { useState, useMemo } from "react";
 
 const App = (props) => {
 
   const [menu, setMenu] = useState('coffee-house');
+  // const [test, setTest] = useState('t');
   const [coffeeItem, setCoffeeItem] = useState(null);
   const data = [
                 {name: 'Solimo Coffee Beans 2 kg', origin: 'Brazil',   price: 10.73, imgName: '1', best: true}, 
@@ -32,8 +33,18 @@ const App = (props) => {
       setMenuName
   };
 
+  const MemoCoffeeList = useMemo(() => {
+    return <CoffeeList 
+              menu={menu}
+              data={data} 
+              onCoffeeItemClick={(item) => {
+                setCoffeeItem(item)}}/>;
+  }, [menu]);
+
   return (
     <div className="App">
+
+      {/* <button onClick={()=>setTest('test 2')}>app {test}</button> */}
 
       <MenuContext.Provider value={valueMenuContext}>
         
@@ -42,12 +53,7 @@ const App = (props) => {
         <div className='content'> 
             <About 
               coffeeItem={coffeeItem}/>
-            {coffeeItem ? null : 
-              <CoffeeList 
-                  data={data} 
-                  onCoffeeItemClick={item => setCoffeeItem(item)}
-              />
-            }
+              {coffeeItem ? null : MemoCoffeeList}
         </div>
 
         <Footer/>

@@ -1,20 +1,20 @@
 import './filter.scss';
 
-const Filter = (props) => {
+const Filter = ({onSearch, onFilter, filterText, searchText}) => {
 
     const onSearchChange = (e) => {
         e.preventDefault();
-        props.onSearch(e.target.value.toLowerCase());
+        onSearch(e.target.value.toLowerCase());
     }
    
     const onFilterChange = (e) => {
         e.preventDefault();
         let inpFilterText = e.target.name;
 
-        if (inpFilterText === props.filterText) {
+        if (inpFilterText === filterText) {
             inpFilterText = '';
         }
-        props.onFilter(inpFilterText);
+        onFilter(inpFilterText);
     }
 
     const buttonsFilter = (...btns) => {
@@ -22,7 +22,7 @@ const Filter = (props) => {
         <button 
             key={key}
             name={i}
-            className={(props.filterText === i) ? 'btn-filter checked' : 'btn-filter'}
+            className={(filterText === i) ? 'btn-filter checked' : 'btn-filter'}
             onClick={onFilterChange}>
                 {i}
         </button>);
@@ -37,7 +37,7 @@ const Filter = (props) => {
                     name="search-box"
                     type='text' 
                     placeholder='start typing here...'
-                    value={props.searchText} 
+                    value={searchText} 
                     onChange={onSearchChange}/>
             </div>
 
